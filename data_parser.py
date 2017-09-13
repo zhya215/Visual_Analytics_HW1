@@ -28,14 +28,17 @@ def convert_df2json(df, countries, years, ds_name):
 # remove the datasets without values, and return the result in json format.
 def extract_data(country_indice, country, color, df, years, ds_name):
     tmp_years = []
-    tmp_ages = []
+    tmp_value = []
     # extract all years without data.
     # extract all not nan ages.
     i = 0
     for x in list(df.iloc[country_indice, :]):
         if math.isnan(x) != True:
             tmp_years.append(years[i])
-            tmp_ages.append(x)
+            tmp_value.append(x)
         i += 1
-    tmp_json = {"country": country, "years": tmp_years, ds_name: tmp_ages, "color": color}
+    tmp_json = {"country": country, "years": tmp_years, ds_name: tmp_value, "color": color}
     return tmp_json
+
+def extract_column_by_indice(df, indice):
+	return list(df.iloc[:, indice])
